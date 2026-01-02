@@ -116,4 +116,25 @@ window.addEventListener('scroll', () => {
             item.classList.add('active');
         }
     });
-}); 
+});
+
+// Theme switcher
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Function to apply the theme
+const applyTheme = (theme) => {
+    body.dataset.theme = theme;
+    themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+};
+
+// Check for saved theme in localStorage
+const savedTheme = localStorage.getItem('theme') || 'light';
+applyTheme(savedTheme);
+
+// Event listener for the toggle button
+themeToggle.addEventListener('click', () => {
+    const newTheme = body.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', newTheme);
+    applyTheme(newTheme);
+});
